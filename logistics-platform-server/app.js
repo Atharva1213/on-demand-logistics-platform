@@ -1,29 +1,60 @@
-//require the module
 const express = require('express');
 const dotenv = require('dotenv');
+const sessions = require('express-session');
+const cookieParser = require('cookie-parser');
 const cors = require('cors');
+
 dotenv.config({ path: '.env' });
 
-if (!process.env.PORT) {
-  console.error(
-    '❌ Error: .env file not loaded or missing required environment variables.'
-  );
+if (
+  !process.env.PORT ||
+  !process.env.SESSION_SECRET ||
+  !process.env.CLIENT_URL
+) {
+  console.error('❌ Error: .env file missing required environment variables.');
   process.exit(1);
 }
 
 require('./db/database');
 
+const registerRouter = require('./routes/register');
+const loginRouter = require('./routes/login');
+
 const PORT = process.env.PORT;
+const SESSION_SECRET = process.env.SESSION_SECRET;
+const CLIENT_URL = process.env.CLIENT_URL;
+const ONEWEEK = 1000 * 60 * 60 * 24 * 7;
+
 const app = express();
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(cors());
+app.use(
+  sessions({
+    secret: SESSION_SECRET,
+    saveUninitialized: true,
+    cookie: { maxAge: ONEWEEK, sameSite: 'lax' },
+    resave: false,
+  })
+);
+
+app.use(cookieParser());
+
+app.use(
+  cors({
+    origin: CLIENT_URL,
+    credentials: true,
+  })
+);
+
+app.use('/api/login', loginRouter);
+app.use('/api/register', registerRouter);
 
 app.get('/', (_, res) => {
-  res.json({ message: 'Server Set Up Succesfully (Health Check)' });
+  res.json({ message: 'Server Set Up Successfully (Health Check)' });
 });
 
 app.listen(PORT, () => {
-  console.log(`Server Listening on ${process.env.PORT}`);
+  console.log(`Server listening on port ${PORT}`);
 });
