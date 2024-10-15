@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { handleRegisterSubmit } from '../../server/register/register';
+import { fullNameRegex, phoneNumberRegex } from '../../utils/validFormte';
 import { handleLoginSubmit, loginUserCheck } from '../../server/login/login';
 
 const useLogin = () => {
@@ -12,6 +13,7 @@ const useLogin = () => {
     confirmPassword: '',
     phoneNumber: '',
     fullName: '',
+    userRole: '',
   });
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [spinner, setSpinner] = useState('invisible');
@@ -26,6 +28,13 @@ const useLogin = () => {
     }));
   };
 
+  const handleRoleChange = (e) => {
+    setUserLoginData({
+      ...userLoginData,
+      userRole: e.target.value,
+    });
+  };
+
   const clearData = () => {
     setUserLoginData({
       username: '',
@@ -34,6 +43,7 @@ const useLogin = () => {
       confirmPassword: '',
       phoneNumber: '',
       fullName: '',
+      userRole: '',
     });
     setConfirmPasswordVisible(false);
     setPasswordVisible(false);
@@ -50,9 +60,6 @@ const useLogin = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (loginStatusCheck) {
-      const fullNameRegex = /^[a-zA-Z\s]+$/;
-      const phoneNumberRegex = /^\d{10}$/;
-
       if (!fullNameRegex.test(userLoginData.fullName)) {
         toast.error('Full Name must contain only alphabetic characters.');
         return;
@@ -102,6 +109,7 @@ const useLogin = () => {
     toggleConfirmPasswordVisibility,
     handleSubmit,
     setLoginStatusCheck,
+    handleRoleChange,
   };
 };
 

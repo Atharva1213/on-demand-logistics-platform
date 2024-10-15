@@ -14,6 +14,7 @@ const Login = () => {
     toggleConfirmPasswordVisibility,
     handleSubmit,
     setLoginStatusCheck,
+    handleRoleChange,
   } = useLogin();
 
   return (
@@ -66,6 +67,8 @@ const Login = () => {
                 style={{ width: '100%' }}
                 value={userLoginData.userPassword}
                 onChange={handleLoginChange}
+                onCopy={(e) => e.preventDefault()}
+                onPaste={(e) => e.preventDefault()}
               />
               <span
                 className="material-icons"
@@ -91,6 +94,8 @@ const Login = () => {
                   value={userLoginData.confirmPassword}
                   placeholder="Enter Confirm Password"
                   onChange={handleLoginChange}
+                  onCopy={(e) => e.preventDefault()}
+                  onPaste={(e) => e.preventDefault()}
                   required
                   style={{ width: '100%' }}
                 />
@@ -109,6 +114,22 @@ const Login = () => {
                   {ConfirmpasswordVisible ? 'visibility' : 'visibility_off'}
                 </span>
               </div>
+            )}
+
+            {loginStatusCheck && (
+              <select
+                name="userRole"
+                value={userLoginData.userRole}
+                onChange={handleRoleChange}
+                className="selectOption"
+                required
+              >
+                <option value="" disabled>
+                  Select your role
+                </option>
+                <option value="user">User</option>
+                <option value="driver">Driver</option>
+              </select>
             )}
 
             {loginStatusCheck && (

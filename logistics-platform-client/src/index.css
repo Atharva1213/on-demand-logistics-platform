@@ -769,6 +769,14 @@ code {
   border-radius: 4px;
 }
 
+.selectOption {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: #eaf5ff;
+  margin-bottom: 3vh;
+}
 .form-group small {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   display: block;
@@ -1077,3 +1085,17 @@ code {
 }
 
 /* EDIT METADATA  */
+
+.addEntryButton {
+  background-color: #624fc2;
+  height: 80%;
+  width: 9vw;
+  border-radius: 25px;
+  border: none;
+  outline: none;
+  font-family: 'Manrope';
+  color: white;
+  font-size: 1.7vh;
+  font-weight: 500;
+  transition: 0.3s ease all;
+}

@@ -23,6 +23,32 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  userRole: {
+    type: String,
+    require: true,
+  },
+  vehicleNumber: {
+    type: String,
+  },
+  vehicleType: {
+    type: String,
+  },
+  profileStatus: {
+    type: Boolean,
+    default: false,
+  },
+  image: {
+    data: Buffer,
+    contentType: String,
+  },
+  earnedMoney: {
+    type: Number,
+    default: 0,
+  },
+  verifyStatus: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 // Create User model

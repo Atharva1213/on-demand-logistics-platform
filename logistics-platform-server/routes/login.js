@@ -31,6 +31,7 @@ router.post('/', async (req, res) => {
     const userPayLoad = {
       userEmail: user.userEmail,
       userId: user._id,
+      userRole: user.userRole,
     };
     const token = jwt.sign(userPayLoad, JWT_SECRET, {
       expiresIn: '7d',
@@ -52,7 +53,9 @@ router.get('/user_login', isAuthenticated, (req, res) => {
       userEmail: req.user.userEmail,
     });
   } else {
-    res.status(401).json({ message: 'User not authenticated' });
+    res
+      .status(401)
+      .json({ message: 'User not authenticated', reason: error.message });
   }
 });
 

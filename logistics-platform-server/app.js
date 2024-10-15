@@ -19,6 +19,9 @@ require('./db/database');
 
 const registerRouter = require('./routes/register');
 const loginRouter = require('./routes/login');
+const adminRouter = require('./routes/admin');
+const bookingRoutes = require('./routes/booking');
+const profileRoutes = require('./routes/profile');
 
 const PORT = process.env.PORT;
 const SESSION_SECRET = process.env.SESSION_SECRET;
@@ -50,6 +53,9 @@ app.use(
 
 app.use('/api/login', loginRouter);
 app.use('/api/register', registerRouter);
+app.use('/api/booking', bookingRoutes);
+app.use('/api/admin', adminRouter);
+app.use('/api/profile', profileRoutes);
 
 app.get('/', (_, res) => {
   res.json({ message: 'Server Set Up Successfully (Health Check)' });

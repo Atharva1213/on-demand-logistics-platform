@@ -18,6 +18,8 @@ export const handleLoginSubmit = async (
     );
     if (response.data.token) {
       localStorage.setItem('token', response.data.token);
+      localStorage.setItem('userRole', response.data.userInfo.userRole);
+      localStorage.setItem('userId', response.data.userInfo.userId);
       ShowSuccessMessage(response.data.message);
       setTimeout(() => {
         window.location.href = '/dashboard';
