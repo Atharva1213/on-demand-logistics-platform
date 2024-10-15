@@ -18,7 +18,7 @@ const Profile = () => {
     };
 
     fetchUserData();
-  }, []);
+  }, [userId]);
 
   return (
     <>

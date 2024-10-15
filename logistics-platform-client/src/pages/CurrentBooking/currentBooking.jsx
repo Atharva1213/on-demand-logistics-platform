@@ -26,7 +26,7 @@ const CurrentBooking = () => {
     };
 
     fetchUserData();
-  }, []);
+  }, [userId,userRole]);
 
   return (
     <>

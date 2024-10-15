@@ -20,7 +20,7 @@ const ViewBookingPage = () => {
       await fetchUserBookingInfo(userId, setViewBooking);
     };
     fetchUserData();
-  }, []);
+  }, [userId]);
   return (
     <>
       <ToastContainer />

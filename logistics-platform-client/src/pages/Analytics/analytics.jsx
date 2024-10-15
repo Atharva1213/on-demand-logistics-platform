@@ -7,7 +7,7 @@ import { getAnalytics } from '../../server/admin/admin';
 import AnalyticsDiv from '../../components/Analytics/analyticsDiv';
 
 const Analytics = () => {
-  const { userId, userRole } = useAuth();
+  const {userRole } = useAuth();
   const [active, setActive] = useState('Analytics');
   const [userCount, setUserCount] = useState(null);
   const [driverCount, setDriverCount] = useState(null);
